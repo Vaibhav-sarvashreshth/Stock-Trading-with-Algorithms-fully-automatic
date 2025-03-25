@@ -1,0 +1,86 @@
+so, i want you to, write a python code that do :
+(currently the code is only for to trade tatasteel , with token : 3499)
+1. first should check if current time is in between 9 am and 3:15 pm . then if yes then you must do :
+a.   first order should be buying order. Place a buying order and store it in buying_price. Check if its ltp is 0.1 % more than the buying_price (Note while checking the ltp you have to read the ltp from redis). If yes, then place sell order. 
+
+And if the ltp is below 0.2 % of buying_price , then also make a sell order, and flag pnl variable as 0. Also print the result, as if it was profit or loss.
+
+b. if pnl ==0 (means loss and 1 means profit), then change the stock action to other. As , if it was buy then make it sell and vice versa. After this repeat step a.
+
+c. Have a order counter. IF number of order placed by you is more than 20 , then stop the while loop, and print , order reached order_count.
+
+================
+
+okay, i have the code , but i want to add one more request :
+
+1. Have a variable inPossition , which will be true if you already in a position. If you are in a position then just check if you are hitting the target or stop loss. after hitting one of them , just after that take a position. dont take position if you have already taken one
+
+==============
+
+
+i have following code, modify it according to request :
+
+
+# Main trading logic
+order_count = 0
+pnl = 1  # Start with profit state
+
+
+while order_count < 20:
+    current_time = datetime.datetime.now().time()
+    if current_time >= datetime.time(9, 0) and current_time <= datetime.time(15, 15):
+        if pnl == 1:
+            buy_order = place_order('B')
+            if buy_order and buy_order.get('stat') == 'Ok':
+                buying_price = float(redis_client.hget('stock_data', TOKEN))
+                print(f"Bought at {buying_price}")
+                order_count += 1
+                tar = buying_price * 1.001
+                sl = buying_price * 0.998
+                while True:
+                    ltp = float(redis_client.hget('stock_data', TOKEN))
+                    
+                    if ltp >= tar:
+                        sell_order = place_order('S')
+                        if sell_order and sell_order.get('stat') == 'Ok':
+                            print(f"Sold at {ltp}, Profit!")
+                            pnl = 1
+                        break
+                    elif ltp <= sl:
+                        sell_order = place_order('S')
+                        if sell_order and sell_order.get('stat') == 'Ok':
+                            print(f"Sold at {ltp}, Loss!")
+                            pnl = 0
+                        break
+                    time.sleep(1)  # Check every 5 seconds
+
+        elif pnl == 0:
+            sell_order = place_order('S')
+            if sell_order and sell_order.get('stat') == 'Ok':
+                selling_price = float(redis_client.hget('stock_data', TOKEN))
+                print(f"Sold at {selling_price}")
+                order_count += 1
+                tar = selling_price * 0.999
+                sl = selling_price * 1.002
+                
+                while True:
+                    ltp = float(redis_client.hget('stock_data', TOKEN))
+                    if ltp <= tar:
+                        buy_order = place_order('B')
+                        if buy_order and buy_order.get('stat') == 'Ok':
+                            print(f"Bought at {ltp}, Profit!")
+                            pnl = 0
+                        break
+                    elif ltp >= sl:
+                        buy_order = place_order('B')
+                        if buy_order and buy_order.get('stat') == 'Ok':
+                            print(f"Bought at {ltp}, Loss!")
+                            pnl=1
+                        break
+                    time.sleep(1)  # Check every 5 seconds
+    else:
+        print("Market is closed.")
+        break
+
+print("Order reached order_count.")
+

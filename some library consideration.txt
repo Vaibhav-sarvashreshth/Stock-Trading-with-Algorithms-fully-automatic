@@ -1,0 +1,1 @@
+ neo-api-client 1.2.0 has requirement requests==2.25.1, but you'll have requests 2.32.3 which is incompatible.

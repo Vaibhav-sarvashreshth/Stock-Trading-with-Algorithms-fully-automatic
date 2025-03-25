@@ -1,0 +1,7 @@
+the responce after placing an order :
+
+
+{'stat': 'Ok', 'nOrdNo': '241003001256604', 'tid': 'server4_1653464', 'stCode': 200}
+
+
+

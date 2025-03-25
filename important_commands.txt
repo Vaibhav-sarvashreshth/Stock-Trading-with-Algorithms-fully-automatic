@@ -1,0 +1,98 @@
+
+
+
+for mysql :
+
+
+insert into stocks (stock_name,nse_name,yf_name,stock_number,kotak_name,rr_ratio) values ("TATASTEEL","TATASTEEL","TATASTEEL.NS",3499,"TATASTEEL-EQ",1.5);
+
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio) values ("INDUSTOWER","INDUSTOWER","INDUSTOWER.NS",29135,"INDUSTOWER-EQ",1.5);
+
+
+
+
+
+
+
+
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio) values ("UNIONBANK","UNIONBANK","UNIONBANK.NS",10753,"UNIONBANK-EQ",1.5);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio) values ("ZEEL","ZEEL","ZEEL.NS",3812,"ZEEL-EQ",1.5);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio) values ("UPL","UPL","UPL.NS",11287,"UPL-EQ",1.5);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio) values ("CDSL","CDSL","CDSL.NS",21174,"CDSL-EQ",1.5);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("HEROMOTOCO","HEROMOTOCO","HEROMOTOCO.NS",1348,"HEROMOTOCO-EQ",1.5,0.12,0.21);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("CGPOWER","CGPOWER","CGPOWER.NS",760,"CGPOWER-EQ",1.5,0.12,0.25);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("CANBK","CANBK","CANBK.NS",10794,"CANBK-EQ",1.5,0.10,0.20);
+
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("LTIM","LTIM","LTIM.NS",17818,"LTIM-EQ",1.5,0.12,0.25);
+
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("WIPRO","WIPRO","WIPRO.NS",3787,"WIPRO-EQ",1.5,0.12,0.25);
+
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("CASTROLIND","CASTROLIND","CASTROLIND.NS",1250,"CASTROLIND-EQ",1.5,0.12,0.21);
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio,p_per,l_per) values ("INOXWIND","INOXWIND","INOXWIND.NS",7852,"INOXWIND-EQ",1.5,0.12,0.21);
+
+
+
+UNIONBANK
+
+
+insert into stocks (stock_name , nse_name , yf_name , stock_number, kotak_name,rr_ratio) values ("PEL","PEL","PEL.NS",2412,"PEL-EQ",1.5);
+
+
+
+
+
+
+
+
+
+# data analysis commands
+
+1. to know todays total profit :
+
+here you need to change the date to that day
+
+select sum(change_percentage) from all_trades where time > timestamp("2024-11-01");
+
+2. to know about todays the highest profit giver :
+
+change the date accordingly 
+
+
+select * from all_trades where time > timestamp("2024-11-01") and change_percentage = (select max(change_percentage) from all_trades where time > timestamp("2024-11-04") and time < (timestamp("2024-11-05")));
+
+3. to know about todays the highest loss giver :
+
+change the date accordingly 
+
+
+select * from all_trades where time > timestamp("2024-11-01") and change_percentage = (select min(change_percentage) from all_trades where time > timestamp("2024-11-04") and time < (timestamp("2024-11-05")));
+
+4. to know about the only profit percentage of the day:
+
+select sum(change_percentage) from all_trades where time > timestamp("2024-11-05") and change_percentage >0;
+
+5. to know only about the loss percentage of the day :
+
+select sum(change_percentage) from all_trades where time > timestamp("2024-11-05") and change_percentage < 0;
+
+6. to know about the number of profit givers on that day :
+
+select count(change_percentage) from all_trades where change_percentage >0 and time >timestamp("2024-11-05");
+
+7. to know about the number of loss givers on that day :
+
+select count(change_percentage) from all_trades where change_percentage <0 and time >timestamp("2024-11-05");
+
+8. 

@@ -1,0 +1,31 @@
+TATAPOWER-EQ   TATAPOWER : 3426
+
+
+TATASTEEL-EQ   TATASTEEL : 3499
+
+
+HFCL-EQ : HFCL : 21951
+
+BEL-EQ : BEL : 383
+
+M&M-EQ : M&M : 2031
+
+
+IOC-EQ : IOC : 1624
+
+ADANIPORTS : ADANIPORTS-EQ:  15083 
+
+SAIL : SAIL-EQ : 2963
+
+ZEEL : ZEEL-EQ : 3812
+
+
+
+
+
+
+
+
+not for kotak : 
+RVNL : RVNL-EQ : 9552 (do not support MIS)
+

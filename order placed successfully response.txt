@@ -1,0 +1,1 @@
+Order placed successfully: {'stat': 'Ok', 'nOrdNo': '240723001774901', 'tid': 'server1_3278745', 'stCode': 200}

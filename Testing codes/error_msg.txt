@@ -1,0 +1,16 @@
+ERROR msg (0)
+Reason: ConnectionError
+HTTPSConnectionPool(host='gw-napi.kotaksecurities.com', port=443): Max retries exceeded with url: /Orders/2.0/quick/order/rule/ms/place?sId=server1 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00B8DB38>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+
+
+Error in buying the order {'error': [{'code': '91010', 'message': 'Service error'}]}
+
+
+ERROR msg (0)
+Reason: ConnectionError
+HTTPSConnectionPool(host='gw-napi.kotaksecurities.com', port=443): Max retries exceeded with url: /Orders/2.0/quick/order/rule/ms/place?sId=server1 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00BBAE80>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))
+
+Error in buying the order {'error': ApiException("(0)\nReason: ConnectionError\nHTTPSConnectionPool(host='gw-napi.kotaksecurities.com', port=443): Max retries exceeded with url: /Orders/2.0/quick/order/rule/ms/place?sId=server1 (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x00BBAE80>: Failed to establish a new connection: [Errno 11001] getaddrinfo failed'))\n")}
+
+
+on socket side : [OnError]:  [Errno 11001] getaddrinfo failed
